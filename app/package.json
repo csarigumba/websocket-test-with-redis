@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.mjs",
   "scripts": {
-    "app": "node index.mjs"
+    "app": "APPID=1111 node index.mjs"
   },
   "keywords": [],
   "author": "",
