@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.mjs",
   "scripts": {
-    "app": "APPID=1111 node index.mjs"
+    "app": "node index.mjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.18.2",
     "http": "0.0.1-security",
     "redis": "^3.0.2",
     "websocket": "^1.0.31"

@@ -1,4 +1,5 @@
 import http from 'http';
+import express from 'express';
 import ws from 'websocket';
 import redis from 'redis';
 const APPID = process.env.APPID;
@@ -33,11 +34,20 @@ subscriber.on('message', function (channel, message) {
 subscriber.subscribe('livechat');
 
 //create a raw http server (this will help us create the TCP which will then pass to the websocket to do the job)
-const httpserver = http.createServer();
+let app = express();
+const httpserver = http.createServer(express);
+// Also mount the app here
+httpserver.on('request', app);
 
 //pass the httpserver object to the WebSocketServer library to do all the job, this class will override the req/res
 const websocket = new WebSocketServer({
   httpServer: httpserver,
+});
+
+app.get('/health', function (req, res) {
+  res.send({
+    health: 'OK',
+  });
 });
 
 httpserver.listen(3000, () => console.log('My server is listening on port 3000'));
